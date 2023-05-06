@@ -1620,9 +1620,8 @@ const THEME_KEY = {
   themeService: "devuiThemeService"
 };
 const devuiLightTheme = new Theme({
-  id: "devui-light-theme",
+  id: "b-light-theme",
   name: "Light Mode",
-  cnName: "\u6D45\u8272\u4E3B\u9898",
   data: {
     "b-global-bg": "#f3f6f8",
     "b-global-bg-normal": "#ffffff",
@@ -1753,9 +1752,8 @@ const devuiLightTheme = new Theme({
   isDark: false
 });
 const devuiGreenTheme = new Theme({
-  id: "devui-green-theme",
+  id: "b-green-theme",
   name: "Green - Light Mode",
-  cnName: "\u7EFF\u8272\u4E3B\u9898",
   data: __spreadProps(__spreadValues({}, devuiLightTheme.data), {
     "b-global-bg": "#f3f8f7",
     "b-brand": "#3DCCA6",
@@ -1797,13 +1795,12 @@ const devuiGreenTheme = new Theme({
     "b-icon-fill-active-disabled": "#c5f0e5",
     "b-range-item-hover-bg": "#d8f9ea"
   }),
-  extends: "devui-light-theme",
+  extends: "b-light-theme",
   isDark: false
 });
 const devuiDarkTheme = new Theme({
-  id: "devui-dark-theme",
+  id: "b-dark-theme",
   name: "Dark Mode",
-  cnName: "\u6DF1\u8272\u4E3B\u9898",
   data: {
     "b-global-bg": "#202124",
     "b-global-bg-normal": "#202124",
@@ -1894,13 +1891,12 @@ const devuiDarkTheme = new Theme({
     "b-menu-item-hover": "#fff",
     "b-menu-disabled": "#919191"
   },
-  extends: "devui-light-theme",
+  extends: "b-light-theme",
   isDark: true
 });
 const devuiGreenDarkTheme = new Theme({
-  id: "devui-green-dark-theme",
+  id: "b-green-dark-theme",
   name: "Green - Dark Mode",
-  cnName: "\u7EFF\u8272\u6DF1\u8272\u4E3B\u9898",
   data: __spreadProps(__spreadValues({}, devuiDarkTheme.data), {
     "b-brand": "#3DCCA6",
     "b-brand-foil": "#395e54",
@@ -1933,7 +1929,7 @@ const devuiGreenDarkTheme = new Theme({
     "b-primary-disabled": "#28544B",
     "b-icon-fill-active-disabled": "#28544B"
   }),
-  extends: "devui-dark-theme",
+  extends: "b-dark-theme",
   isDark: true
 });
 const infinityTheme = new Theme({
@@ -3399,15 +3395,15 @@ function ThemeServiceInit(themes, defaultThemeName, extraData, ieSupport = false
     return null;
   }
   window[THEME_KEY.themeCollection] = themes || {
-    "devui-light-theme": devuiLightTheme,
-    "devui-dark-theme": devuiDarkTheme
+    "b-light-theme": devuiLightTheme,
+    "b-dark-theme": devuiDarkTheme
   };
-  window[THEME_KEY.currentTheme] = defaultThemeName || "devui-light-theme";
+  window[THEME_KEY.currentTheme] = defaultThemeName || "b-light-theme";
   const eventBus = window["globalEventBus"] || new EventBus();
   const themeService = new ThemeService(eventBus);
   window[THEME_KEY.themeService] = themeService;
   themeService.setExtraData(extraData || {
-    "devui-dark-theme": {
+    "b-dark-theme": {
       appendClasses: ["dark-mode"]
     }
   });
@@ -3425,9 +3421,9 @@ function ThemeServiceFollowSystemOn(themeConfig) {
   themeService.registerMediaQuery();
   return themeService.mediaQuery.prefersColorSchemeChange.subscribe((value) => {
     if (value === "dark") {
-      themeService.applyTheme(window[THEME_KEY.themeCollection][themeConfig && themeConfig.darkThemeName || "devui-dark-theme"]);
+      themeService.applyTheme(window[THEME_KEY.themeCollection][themeConfig && themeConfig.darkThemeName || "b-dark-theme"]);
     } else {
-      themeService.applyTheme(window[THEME_KEY.themeCollection][themeConfig && themeConfig.lightThemeName || "devui-light-theme"]);
+      themeService.applyTheme(window[THEME_KEY.themeCollection][themeConfig && themeConfig.lightThemeName || "b-light-theme"]);
     }
   });
 }
